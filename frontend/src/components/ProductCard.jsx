@@ -2,20 +2,20 @@ import { Link } from "react-router-dom"
 
 export default function ProductCard({ product, onAdd }) {
   return (
-    <div id={`product-${product.id}`} className="border p-4 rounded shadow bg-white">
+    <div id={`product-${product.id}`} className="bg-gray-900 bg-opacity-80 rounded-2xl p-5 shadow-xl border border-gray-800 mb-4 sticky top-6 text-gray-100">
       <Link to={`/product/${product.id}`}>
         <img src={product.image} alt={product.name} className="w-full h-48 object-cover mb-4 rounded" />
       </Link>
       <h3 className="text-lg font-semibold mb-2">
-        <Link to={`/product/${product.id}`} className="hover:underline text-blue-600">
+        <Link to={`/product/${product.id}`} className="hover:underline text-white-600">
           {product.name}
         </Link>
       </h3>
-      <p className="text-gray-600 mb-2">{product.price} ₽</p>
-      <p className="text-xs text-gray-500 mb-2">Код: {product.code}</p>
+      <p className="text-white-600 mb-2">{product.price} ₽</p>
+      <p className="text-xs text-white-500 mb-2">Код: {product.code}</p>
       <button
         onClick={() => onAdd(product)}
-        className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+        className="bg-yellow-500 text-black px-4 py-2 rounded hover:bg-yellow-600"
       >
         В корзину
       </button>

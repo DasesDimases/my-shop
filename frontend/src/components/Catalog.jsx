@@ -30,9 +30,9 @@ const Catalog = ({ products = [], onAddToCart }) => {
 
   return (
     <div className="container mx-auto px-4 py-6">
-      <h1 className="text-2xl font-bold mb-4">Каталог товаров</h1>
+      <h1 className="text-2xl font-bold mb-4 text-yellow-300">Каталог товаров</h1>
       <button
-        className="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        className="bg-gray-900 bg-opacity-80 rounded-2xl p-5 shadow-xl border border-gray-800 mb-4 sticky top-6 text-gray-100"
         onClick={() => setShowFilters((prev) => !prev)}
       >
         {showFilters ? "Скрыть фильтры" : "Показать фильтры"}

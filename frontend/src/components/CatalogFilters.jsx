@@ -16,7 +16,6 @@ export default function CatalogFilters({
   const [sort, setSort] = useState("");
 
   useEffect(() => {
-    // Получение уникальных категорий и моделей из товаров
     setCategories([
       ...new Set(products.flatMap((p) => p.category ? [p.category] : [])),
     ]);
@@ -53,7 +52,6 @@ export default function CatalogFilters({
     onReset && onReset();
   };
 
-  // Поиск и сортировка
   const handleSearch = (e) => {
     setSearch(e.target.value);
     onSearchChange(e.target.value);
@@ -65,29 +63,29 @@ export default function CatalogFilters({
   };
 
   return (
-    <div className="bg-white rounded-xl p-4 shadow border mb-4 sticky top-6">
-      <div className="flex items-center justify-between mb-2">
-        <span className="font-bold text-lg">Фильтры</span>
+    <div className="bg-gray-900 bg-opacity-80 rounded-2xl p-5 shadow-xl border border-gray-800 mb-4 sticky top-6 text-gray-100">
+      <div className="flex items-center justify-between mb-3">
+        <span className="font-extrabold text-xl tracking-tight">Фильтры</span>
         <button
-          className="text-xs bg-gray-200 hover:bg-gray-300 rounded px-2 py-1 ml-2"
+          className="text-xs font-bold bg-yellow-500 hover:bg-yellow-600 text-black rounded px-3 py-1 ml-2 shadow transition"
           onClick={handleReset}
         >
-          Сбросить фильтры
+          Сбросить
         </button>
       </div>
 
-      <div className="mb-4">
+      <div className="mb-5">
         <input
           type="text"
-          className="w-full px-3 py-2 rounded border"
+          className="w-full px-4 py-2 rounded border-2 border-gray-700 bg-gray-800 text-gray-100 font-semibold focus:border-yellow-400 outline-none transition"
           placeholder="Поиск по названию..."
           value={search}
           onChange={handleSearch}
         />
       </div>
 
-      <div className="mb-4">
-        <div className="font-semibold mb-1">Категории</div>
+      <div className="mb-5">
+        <div className="font-semibold mb-1 text-yellow-300">Категории</div>
         <div className="flex flex-wrap gap-2">
           {categories.length === 0 && (
             <span className="text-gray-400 text-sm">Нет категорий</span>
@@ -95,7 +93,10 @@ export default function CatalogFilters({
           {categories.map((cat) => (
             <button
               key={cat}
-              className={`px-2 py-1 rounded text-sm border ${selectedCategories.includes(cat) ? "bg-blue-500 text-white" : "bg-gray-100 hover:bg-gray-200"}`}
+              className={`px-2 py-1 rounded-lg text-sm font-semibold border-2 transition
+                ${selectedCategories.includes(cat)
+                  ? "bg-yellow-400 text-black border-yellow-600 shadow"
+                  : "bg-gray-700 text-gray-100 border-gray-600 hover:bg-yellow-100 hover:text-black"}`}
               onClick={() => handleCategory(cat)}
             >
               {cat}
@@ -104,8 +105,8 @@ export default function CatalogFilters({
         </div>
       </div>
 
-      <div className="mb-4">
-        <div className="font-semibold mb-1">Модели</div>
+      <div className="mb-5">
+        <div className="font-semibold mb-1 text-yellow-300">Модели</div>
         <div className="flex flex-wrap gap-2">
           {models.length === 0 && (
             <span className="text-gray-400 text-sm">Нет моделей</span>
@@ -113,7 +114,10 @@ export default function CatalogFilters({
           {models.map((model) => (
             <button
               key={model}
-              className={`px-2 py-1 rounded text-sm border ${selectedModels.includes(model) ? "bg-blue-500 text-white" : "bg-gray-100 hover:bg-gray-200"}`}
+              className={`px-2 py-1 rounded-lg text-sm font-semibold border-2 transition
+                ${selectedModels.includes(model)
+                  ? "bg-yellow-400 text-black border-yellow-600 shadow"
+                  : "bg-gray-700 text-gray-100 border-gray-600 hover:bg-yellow-100 hover:text-black"}`}
               onClick={() => handleModel(model)}
             >
               {model}
@@ -123,11 +127,11 @@ export default function CatalogFilters({
       </div>
 
       <div>
-        <div className="font-semibold mb-1">Сортировка</div>
+        <div className="font-semibold mb-1 text-yellow-300">Сортировка</div>
         <select
           value={sort}
           onChange={handleSort}
-          className="w-full px-2 py-1 rounded border"
+          className="w-full px-2 py-2 rounded border-2 border-gray-700 bg-gray-800 text-gray-100 font-semibold focus:border-yellow-400 outline-none transition"
         >
           <option value="">Без сортировки</option>
           <option value="priceAsc">Цена по возрастанию</option>

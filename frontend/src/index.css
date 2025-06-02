@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  min-height: 100vh;
+  color: #eee;
+}
+
+/* Фон для клиентской части */
+body.site-bg {
+  background: url('/img/fon.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-color: rgba(219, 210, 210, 0.6);
+  background-blend-mode: darken;
+}
+
+/* Фон для админки */
+body.admin-bg {
+  background: #f3f4f6 !important;    /* Светло-серый Tailwind */
+  background-image: none !important;
+  color: #222;
+}

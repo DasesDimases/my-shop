@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import axios from "axios";
 import AdminCustomerClusters from "./pages/AdminCustomerClusters";
 import Admin from "./pages/Admin";
@@ -12,6 +12,100 @@ import Register from "./pages/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Nav from "./components/Nav";
 import Catalog from "./components/Catalog";
+import Home from "./pages/Home";
+
+// Вся логика вынесена в AppContent (внутри Router)
+function AppContent({
+  cart, setCart, handleAddToCart, handleRemoveFromCart, handleClearCart,
+  handleIncreaseQty, handleDecreaseQty, totalCount, productList,
+  handleAddProduct, handleDeleteProduct
+}) {
+  const location = useLocation();
+  // Проверка маршрута для скрытия фона
+  const hideBg = [
+    "/admin",
+    "/admin/customers",
+    "/admin/orders",
+    "/admin/categories"
+  ].some((route) => location.pathname.startsWith(route));
+
+  useEffect(() => {
+    if (hideBg) {
+      document.body.classList.add("admin-bg");
+      document.body.classList.remove("site-bg");
+    } else {
+      document.body.classList.add("site-bg");
+      document.body.classList.remove("admin-bg");
+    }
+  }, [hideBg]);
+
+  return (
+    <>
+      <Nav totalCount={totalCount} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/catalog"
+          element={<Catalog products={productList} onAdd={handleAddToCart} />}
+        />
+        <Route
+          path="/product/:id"
+          element={<ProductPage onAdd={handleAddToCart} />}
+        />
+        <Route
+          path="/cart"
+          element={
+            <Cart
+              cart={cart}
+              onRemove={handleRemoveFromCart}
+              onClear={handleClearCart}
+              onIncrease={handleIncreaseQty}
+              onDecrease={handleDecreaseQty}
+            />
+          }
+        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute requireAdmin>
+              <Admin
+                products={productList}
+                onAddProduct={handleAddProduct}
+                onDeleteProduct={handleDeleteProduct}
+              />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/orders"
+          element={
+            <ProtectedRoute requireAdmin>
+              <AdminOrders />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/categories"
+          element={
+            <ProtectedRoute requireAdmin>
+              <CategoriesAdmin />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/customers"
+          element={
+            <ProtectedRoute requireAdmin>
+              <AdminCustomerClusters />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </>
+  );
+}
 
 export default function App() {
   const [cart, setCart] = useState(() => {
@@ -100,85 +194,19 @@ export default function App() {
 
   return (
     <Router>
-      <Nav totalCount={totalCount} />
-
-      <Routes>
-        {/* Главная страница каталога с фильтрами и товарами */}
-        <Route
-          path="/"
-          element={
-            <Catalog
-              products={productList}
-              onAdd={handleAddToCart}
-            />
-          }
-        />
-
-        {/* Страница отдельного товара */}
-        <Route
-          path="/product/:id"
-          element={<ProductPage onAdd={handleAddToCart} />}
-        />
-
-        {/* Корзина */}
-        <Route
-          path="/cart"
-          element={
-            <Cart
-              cart={cart}
-              onRemove={handleRemoveFromCart}
-              onClear={handleClearCart}
-              onIncrease={handleIncreaseQty}
-              onDecrease={handleDecreaseQty}
-            />
-          }
-        />
-
-        {/* Аутентификация */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-
-        {/* Админские маршруты */}
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute requireAdmin>
-              <Admin
-                products={productList}
-                onAddProduct={handleAddProduct}
-                onDeleteProduct={handleDeleteProduct}
-              />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/admin/orders"
-          element={
-            <ProtectedRoute requireAdmin>
-              <AdminOrders />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/admin/categories"
-          element={
-            <ProtectedRoute requireAdmin>
-              <CategoriesAdmin />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/admin/customers"
-          element={
-            <ProtectedRoute requireAdmin>
-              <AdminCustomerClusters />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
+      <AppContent
+        cart={cart}
+        setCart={setCart}
+        handleAddToCart={handleAddToCart}
+        handleRemoveFromCart={handleRemoveFromCart}
+        handleClearCart={handleClearCart}
+        handleIncreaseQty={handleIncreaseQty}
+        handleDecreaseQty={handleDecreaseQty}
+        totalCount={totalCount}
+        productList={productList}
+        handleAddProduct={handleAddProduct}
+        handleDeleteProduct={handleDeleteProduct}
+      />
     </Router>
   );
 }
