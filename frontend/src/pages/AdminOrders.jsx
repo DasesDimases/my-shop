@@ -6,7 +6,7 @@ export default function AdminOrders() {
   const [orders, setOrders] = useState([])
 
   const fetchOrders = () => {
-    axios.get("http://localhost:8000/orders")
+    axios.get("${import.meta.env.VITE_API_URL}/orders")
       .then(res => setOrders(res.data))
       .catch(err => console.error("Ошибка загрузки заказов:", err))
   }
@@ -17,7 +17,7 @@ export default function AdminOrders() {
 
   const handleDelete = (id) => {
     if (!window.confirm("Удалить этот заказ?")) return
-    axios.delete(`http://localhost:8000/orders/${id}`)
+    axios.delete(`${import.meta.env.VITE_API_URL}/orders/${id}`)
       .then(() => fetchOrders())
       .catch(err => console.error("Ошибка удаления заказа:", err))
   }

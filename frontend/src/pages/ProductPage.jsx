@@ -7,7 +7,7 @@ export default function ProductPage({ onAdd }) {
   const [product, setProduct] = useState(null)
 
   useEffect(() => {
-    axios.get("http://localhost:8000/products")
+    axios.get("${import.meta.env.VITE_API_URL}/products")
       .then(res => {
         const found = res.data.find(p => p.id === id)
         setProduct(found)

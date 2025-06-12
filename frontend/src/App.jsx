@@ -159,7 +159,7 @@ export default function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/products")
+      .get("${import.meta.env.VITE_API_URL}/products")
       .then((res) => setProductList(res.data))
       .catch((err) => console.error("Ошибка загрузки товаров:", err));
   }, []);
@@ -169,7 +169,7 @@ export default function App() {
       setProductList(input);
     } else {
       axios
-        .post("http://localhost:8000/products", input)
+        .post("${import.meta.env.VITE_API_URL}/products", input)
         .then((res) => setProductList((prev) => [...prev, res.data]))
         .catch((err) => console.error("Ошибка добавления товара:", err));
     }

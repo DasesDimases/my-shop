@@ -12,13 +12,13 @@ export default function CategoriesAdmin() {
   }, [])
 
   const fetchData = () => {
-    axios.get("http://localhost:8000/categories").then(res => setCategories(res.data))
-    axios.get("http://localhost:8000/car-models").then(res => setModels(res.data))
+    axios.get("${import.meta.env.VITE_API_URL}/categories").then(res => setCategories(res.data))
+    axios.get("${import.meta.env.VITE_API_URL}/car-models").then(res => setModels(res.data))
   }
 
   const addCategory = () => {
     if (!newCategory.trim()) return
-    axios.post("http://localhost:8000/categories", { name: newCategory })
+    axios.post("${import.meta.env.VITE_API_URL}/categories", { name: newCategory })
       .then(() => {
         setNewCategory("")
         fetchData()
@@ -26,12 +26,12 @@ export default function CategoriesAdmin() {
   }
 
   const deleteCategory = (id) => {
-    axios.delete(`http://localhost:8000/categories/${id}`).then(fetchData)
+    axios.delete(`${import.meta.env.VITE_API_URL}/categories/${id}`).then(fetchData)
   }
 
   const addModel = () => {
     if (!newModel.trim()) return
-    axios.post("http://localhost:8000/car-models", { name: newModel })
+    axios.post("${import.meta.env.VITE_API_URL}/car-models", { name: newModel })
       .then(() => {
         setNewModel("")
         fetchData()
@@ -39,7 +39,7 @@ export default function CategoriesAdmin() {
   }
 
   const deleteModel = (id) => {
-    axios.delete(`http://localhost:8000/car-models/${id}`).then(fetchData)
+    axios.delete(`${import.meta.env.VITE_API_URL}/car-models/${id}`).then(fetchData)
   }
 
   return (

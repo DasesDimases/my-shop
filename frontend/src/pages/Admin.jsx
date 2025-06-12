@@ -20,7 +20,7 @@ export default function Admin({ products, onAddProduct, onDeleteProduct }) {
   const [meta, setMeta] = useState({ categories: [], carModels: [] })
 
   useEffect(() => {
-    axios.get("http://localhost:8000/meta")
+    axios.get("${import.meta.env.VITE_API_URL}/meta")
       .then(res => setMeta(res.data))
       .catch(err => console.error("Ошибка загрузки мета-данных:", err))
   }, [])
@@ -37,7 +37,7 @@ export default function Admin({ products, onAddProduct, onDeleteProduct }) {
       models: form.models
     }
 
-    axios.post("http://localhost:8000/products", newProduct)
+    axios.post("${import.meta.env.VITE_API_URL}/products", newProduct)
       .then(res => {
         onAddProduct(res.data) // передаём только один товар!
         setForm({
@@ -49,7 +49,7 @@ export default function Admin({ products, onAddProduct, onDeleteProduct }) {
 
 
     const handleDelete = (id) => {
-      axios.delete(`http://localhost:8000/products/${id}`)
+      axios.delete(`${import.meta.env.VITE_API_URL}/products/${id}`)
         .then(() => {
           onDeleteProduct(id) // удаляем товар по ID из списка
         })
@@ -59,7 +59,7 @@ export default function Admin({ products, onAddProduct, onDeleteProduct }) {
 
     const handleEditSubmit = (e) => {
       e.preventDefault()
-      axios.put(`http://localhost:8000/products/${editing.id}`, editing)
+      axios.put(`${import.meta.env.VITE_API_URL}/products/${editing.id}`, editing)
         .then(res => {
           // обновляем конкретный товар в списке
           onAddProduct(prev =>
