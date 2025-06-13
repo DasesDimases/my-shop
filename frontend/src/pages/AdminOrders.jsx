@@ -6,7 +6,7 @@ export default function AdminOrders() {
   const [orders, setOrders] = useState([])
 
   const fetchOrders = () => {
-    axios.get("${import.meta.env.VITE_API_URL}/orders")
+    axios.get('${import.meta.env.VITE_API_URL}/orders')
       .then(res => setOrders(res.data))
       .catch(err => console.error("Ошибка загрузки заказов:", err))
   }

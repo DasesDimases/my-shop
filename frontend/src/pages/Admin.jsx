@@ -20,7 +20,7 @@ export default function Admin({ products, onAddProduct, onDeleteProduct }) {
   const [meta, setMeta] = useState({ categories: [], carModels: [] })
 
   useEffect(() => {
-    axios.get("${import.meta.env.VITE_API_URL}/meta")
+    axios.get('${import.meta.env.VITE_API_URL}/meta')
       .then(res => setMeta(res.data))
       .catch(err => console.error("Ошибка загрузки мета-данных:", err))
   }, [])
@@ -37,7 +37,7 @@ export default function Admin({ products, onAddProduct, onDeleteProduct }) {
       models: form.models
     }
 
-    axios.post("${import.meta.env.VITE_API_URL}/products", newProduct)
+    axios.post('${import.meta.env.VITE_API_URL}/products', newProduct)
       .then(res => {
         onAddProduct(res.data) // передаём только один товар!
         setForm({

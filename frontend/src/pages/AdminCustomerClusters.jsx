@@ -24,7 +24,7 @@ export default function AdminCustomerClusters() {
 
 
   useEffect(() => {
-    axios.get("${import.meta.env.VITE_API_URL}/analytics/customers/clusters")
+    axios.get('${import.meta.env.VITE_API_URL}/analytics/customers/clusters')
       .then(res => setClusters(res.data))
       .catch(err => console.error("Ошибка загрузки кластеров:", err));
   }, []);
