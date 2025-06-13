@@ -7,19 +7,20 @@ import RFM3DChart from "../components/RFM3DChart"
 
 export default function AdminCustomerClusters() {
   const [clusters, setClusters] = useState([]);
+  const API = import.meta.env.VITE_API_URL;
 
   const handleRefreshClusters = async () => {
-  try {
-    await fetch("/analytics/customers/clusters", { method: "POST" });
-    await fetch("/analytics/customers/clusters/categories", { method: "POST" });
-    await fetch("/analytics/customers/clusters/models", { method: "POST" });
-    await fetch("/analytics/customers/clusters/rfm", { method: "POST" });
-    alert("Кластеры обновлены!");
-    window.location.reload(); // или вызвать загрузку данных вручную
-  } catch (err) {
-    console.error("Ошибка обновления кластеров:", err);
-    alert("Ошибка при обновлении кластеров");
-  }
+    try {
+      await fetch(`${API}/analytics/customers/clusters`, { method: "POST" });
+      await fetch(`${API}/analytics/customers/clusters/categories`, { method: "POST" });
+      await fetch(`${API}/analytics/customers/clusters/models`, { method: "POST" });
+      await fetch(`${API}/analytics/customers/clusters/rfm`, { method: "POST" });
+      alert("Кластеры обновлены!");
+      window.location.reload();
+    } catch (err) {
+      console.error("Ошибка обновления кластеров:", err);
+      alert("Ошибка при обновлении кластеров");
+    }
 }
 
 
