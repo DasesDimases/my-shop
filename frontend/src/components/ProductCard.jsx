@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const fallbackImage = "frontend/img/no_photo.png";
+const fallbackImage = "/img/no_photo.png";
 
 export default function ProductCard({ product, onAdd }) {
   return (
