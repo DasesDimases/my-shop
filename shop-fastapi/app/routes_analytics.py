@@ -358,21 +358,26 @@ async def summarize_rfm_clusters():
         avg_frequency = data["total_frequency"] / data["count"]
         avg_monetary = data["total_monetary"] / data["count"]
 
-        label = "Обычный клиент"
-        if avg_recency < 30 and avg_frequency > 3 and avg_monetary > 5000:
-            label = "Ценный клиент"
-        elif avg_recency > 90 and avg_frequency <= 1:
-            label = "Клиент на грани ухода"
-        elif avg_frequency >= 2:
-            label = "Постоянный клиент"
-
         result.append({
             "cluster": cluster,
-            "label": label,
             "avg_recency": round(avg_recency, 1),
             "avg_frequency": round(avg_frequency, 1),
             "avg_monetary": round(avg_monetary, 1),
             "count": data["count"]
         })
 
+    # --- Вот здесь определяем ярлыки на основании Monetary ---
+    monetaries = [r["avg_monetary"] for r in result]
+    max_monetary = max(monetaries)
+    min_monetary = min(monetaries)
+
+    for r in result:
+        if r["avg_monetary"] == max_monetary:
+            r["label"] = "Ценный клиент"
+        elif r["avg_monetary"] == min_monetary:
+            r["label"] = "Клиент на грани ухода"
+        else:
+            r["label"] = "Постоянный клиент"
+
     return result
+
