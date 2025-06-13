@@ -13,7 +13,7 @@ def product_helper(p) -> dict:
         "name": p["name"],
         "brand": p.get("brand", ""),
         "price": p["price"],
-        "image": p["image"],
+        "image": p.get("image", ""),
         "description": p.get("description", ""),
         "code": p.get("code", ""),
         "category": p.get("category", ""),

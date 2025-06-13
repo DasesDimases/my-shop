@@ -8,7 +8,7 @@ export default function ProductCard({ product, onAdd }) {
     >
       <Link to={`/product/${product.id}`}>
         <img
-          src={product.image}
+          src={product.image || fallbackImage}
           alt={product.name}
           className="w-full h-48 object-cover mb-4 rounded"
         />

@@ -7,7 +7,7 @@ class Product(BaseModel):
     name: str
     price: int
     brand: str
-    image: str
+    image: Optional[str] = None 
     description: Optional[str] = ""
     code: Optional[str] = ""
     category: Optional[str] = ""

@@ -27,7 +27,7 @@ export default function ProductPage({ onAddToCart }) {
       </Link>
 
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-        <img src={product.image} alt={product.name} className="w-full rounded shadow" />
+        <img src={product.image || fallbackImage} alt={product.name} className="w-full rounded shadow" />
         <div>
           <h1 className="text-3xl font-bold mb-4">
             {/* Новый вывод: бренд + название */}

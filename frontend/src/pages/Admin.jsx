@@ -100,7 +100,7 @@ export default function Admin({ products, onAddProduct, onDeleteProduct }) {
           <input type="number" placeholder="Цена" className="w-full p-2 mb-3 border rounded" required
             value={form.price} onChange={e => setForm({ ...form, price: e.target.value })} />
 
-          <input type="url" placeholder="Ссылка на изображение" className="w-full p-2 mb-3 border rounded" required
+          <input type="url" placeholder="Ссылка на изображение" className="w-full p-2 mb-3 border rounded" 
             value={form.image} onChange={e => setForm({ ...form, image: e.target.value })} />
 
           <textarea placeholder="Описание" className="w-full p-2 mb-3 border rounded" rows={3}
