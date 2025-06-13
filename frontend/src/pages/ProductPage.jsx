@@ -5,8 +5,8 @@ import axios from "axios";
 export default function ProductPage({ onAddToCart }) {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const fallbackImage = "img/no-photo.png";
-  
+  const fallbackImage = "img/no_photo.png";
+
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_API_URL}/products`)
