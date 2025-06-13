@@ -6,6 +6,7 @@ from typing import List, Optional
 class Product(BaseModel):
     name: str
     price: int
+    brand: str
     image: str
     description: Optional[str] = ""
     code: Optional[str] = ""
