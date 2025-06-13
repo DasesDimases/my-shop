@@ -1,10 +1,10 @@
 // src/components/RFMClusterChart.jsx
-import { useEffect, useState } from "react"
-import { Scatter } from "react-chartjs-2"
+import { useEffect, useState } from "react";
+import { Scatter } from "react-chartjs-2";
 import {
   fetchRFMClusters,
   fetchRFMSummary
-} from "../services/analyticsService"
+} from "../services/analyticsService";
 import {
   Chart as ChartJS,
   PointElement,
@@ -12,35 +12,58 @@ import {
   Tooltip,
   Legend,
   Title
-} from "chart.js"
+} from "chart.js";
 
-ChartJS.register(PointElement, LinearScale, Tooltip, Legend, Title)
+ChartJS.register(PointElement, LinearScale, Tooltip, Legend, Title);
 
 const clusterColors = [
   "rgba(255, 99, 132, 0.8)",
   "rgba(54, 162, 235, 0.8)",
   "rgba(75, 192, 192, 0.8)"
-]
+];
+
+// Компонент для цветного бейджа
+function ClusterBadge({ label }) {
+  let color = "bg-gray-200 text-gray-900";
+  let tooltip = "";
+  if (label === "Ценный клиент") {
+    color = "bg-green-200 text-green-900";
+    tooltip = "Высокая сумма и частота покупок, недавно заказывал";
+  } else if (label === "Клиент на грани ухода") {
+    color = "bg-red-200 text-red-900";
+    tooltip = "Давно не делал заказ, низкая активность";
+  } else if (label === "Постоянный клиент") {
+    color = "bg-blue-200 text-blue-900";
+    tooltip = "Часто покупает, но средний чек ниже";
+  } else {
+    tooltip = "Обычный клиент";
+  }
+  return (
+    <span className={`${color} px-2 py-1 rounded-full`} title={tooltip}>
+      {label}
+    </span>
+  );
+}
 
 export default function RFMClusterChart() {
-  const [data, setData] = useState(null)
-  const [summary, setSummary] = useState([])
+  const [data, setData] = useState(null);
+  const [summary, setSummary] = useState([]);
 
   useEffect(() => {
     fetchRFMClusters().then(res => {
-      if (!res || !Array.isArray(res)) return
+      if (!res || !Array.isArray(res)) return;
 
-      const grouped = {}
+      const grouped = {};
 
       res.forEach(c => {
-        const cluster = c.cluster ?? 0
-        const x = c.recency ?? 0
-        const y = c.monetary ?? 0
-        const label = c.name || c.email
+        const cluster = c.cluster ?? 0;
+        const x = c.recency ?? 0;
+        const y = c.monetary ?? 0;
+        const label = c.name || c.email;
 
-        if (!grouped[cluster]) grouped[cluster] = []
-        grouped[cluster].push({ x, y, label })
-      })
+        if (!grouped[cluster]) grouped[cluster] = [];
+        grouped[cluster].push({ x, y, label });
+      });
 
       const datasets = Object.entries(grouped).map(([cluster, points], idx) => ({
         label: `Кластер ${cluster}`,
@@ -48,17 +71,17 @@ export default function RFMClusterChart() {
         backgroundColor: clusterColors[idx % clusterColors.length],
         pointRadius: 6,
         pointHoverRadius: 8
-      }))
+      }));
 
-      setData({ datasets })
-    }).catch(console.error)
+      setData({ datasets });
+    }).catch(console.error);
 
     fetchRFMSummary()
       .then(res => setSummary(res))
-      .catch(console.error)
-  }, [])
+      .catch(console.error);
+  }, []);
 
-  if (!data) return <div>Загрузка...</div>
+  if (!data) return <div>Загрузка...</div>;
 
   const options = {
     responsive: true,
@@ -67,8 +90,8 @@ export default function RFMClusterChart() {
       tooltip: {
         callbacks: {
           label: ctx => {
-            const { x, y, label } = ctx.raw
-            return `${label}: Recency=${x}, Monetary=${y}`
+            const { x, y, label } = ctx.raw;
+            return `${label}: Recency=${x}, Monetary=${y}`;
           }
         }
       },
@@ -85,7 +108,7 @@ export default function RFMClusterChart() {
         title: { display: true, text: "Monetary (общая сумма покупок)" }
       }
     }
-  }
+  };
 
   return (
     <div className="my-6">
@@ -108,7 +131,7 @@ export default function RFMClusterChart() {
             {summary.map(row => (
               <tr key={row.cluster}>
                 <td className="border px-3 py-1">{row.cluster}</td>
-                <td className="border px-3 py-1">{row.label}</td>
+                <td className="border px-3 py-1"><ClusterBadge label={row.label} /></td>
                 <td className="border px-3 py-1 text-right">{row.avg_recency}</td>
                 <td className="border px-3 py-1 text-right">{row.avg_frequency}</td>
                 <td className="border px-3 py-1 text-right">{row.avg_monetary}</td>
@@ -119,5 +142,5 @@ export default function RFMClusterChart() {
         </table>
       </div>
     </div>
-  )
+  );
 }
