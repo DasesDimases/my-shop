@@ -75,7 +75,7 @@ export default function Nav({ totalCount }) {
           ) : (
             <button
               onClick={logout}
-              className="flex items-center gap-1 text-red-200 hover:text-white transition font-medium"
+              className="flex items-center gap-1 text-red-600 hover:text-white transition font-medium"
             >
               <LogOut size={18} /> Выйти
             </button>

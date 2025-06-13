@@ -23,7 +23,7 @@ export default function ProductPage({ onAddToCart }) {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <Link to="/" className="text-blue-600 underline">
+      <Link to="/catalog" className="text-white-600 underline">
         ← Назад в каталог
       </Link>
 
@@ -37,7 +37,7 @@ export default function ProductPage({ onAddToCart }) {
             )}
             {product.name}
           </h1>
-          <p className="text-xl text-gray-800 mb-4">{product.price} ₽</p>
+          <p className="text-xl text-white-800 mb-4">{product.price} ₽</p>
           <p className="text-sm text-gray-700 mb-6 whitespace-pre-line">
             {product.description || "Описание отсутствует"}
           </p>

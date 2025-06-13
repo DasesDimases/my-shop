@@ -13,7 +13,7 @@ export default function Login() {
     e.preventDefault();
     try {
       await login(email, password);
-      navigate("/admin"); // после успешной авторизации
+      navigate("/catalog"); // после успешной авторизации
     } catch {
       alert("Неверные учётные данные");
     }
@@ -21,11 +21,23 @@ export default function Login() {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-sm mx-auto p-6">
-      <h1 className="text-2xl mb-4">Вход в админку</h1>
-      <input type="email" placeholder="Email" required
-        value={email} onChange={e => setEmail(e.target.value)} />
-      <input type="password" placeholder="Пароль" required
-        value={password} onChange={e => setPassword(e.target.value)} />
+      <h1 className="text-2xl mb-4">Вход в аккаунт</h1>
+        <input
+          type="email"
+          placeholder="Email"
+          required
+          className="text-black"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Пароль"
+          required
+          className="text-black"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
       <button type="submit">Войти</button>
     </form>
   );

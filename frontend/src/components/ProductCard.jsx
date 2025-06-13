@@ -6,7 +6,7 @@ export default function ProductCard({ product, onAdd }) {
   return (
     <div
       id={`product-${product.id}`}
-      className="bg-gray-900 bg-opacity-80 rounded-2xl p-5 shadow-xl border border-gray-800 mb-4 sticky top-6 text-gray-100"
+      className="bg-gray-900 bg-opacity-80 rounded-2xl p-5 shadow-xl border border-gray-800 mb-4 text-gray-100"
     >
       <Link to={`/product/${product.id}`}>
         <img

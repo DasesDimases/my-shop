@@ -63,19 +63,19 @@ export default function Cart({ cart, onRemove, onClear, onIncrease, onDecrease }
             >
               {item.name}
             </Link>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-white-600">
               {item.qty} × {item.price} ₽ = {item.qty * item.price} ₽
             </p>
             <div className="flex gap-2 mt-2">
               <button
                 onClick={() => onDecrease(item.id)}
-                className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                className="px-2 py-1 rounded hover:bg-yellow-600"
               >
                 −
               </button>
               <button
                 onClick={() => onIncrease(item.id)}
-                className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                className="px-2 py-1 rounded hover:bg-yellow-600"
               >
                 +
               </button>
