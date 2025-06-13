@@ -22,7 +22,6 @@ const clusterColors = [
   "rgba(75, 192, 192, 0.8)"
 ];
 
-// Компонент для цветного бейджа
 function ClusterBadge({ label }) {
   let color = "bg-gray-200 text-gray-900";
   let tooltip = "";
@@ -48,41 +47,52 @@ function ClusterBadge({ label }) {
 export default function RFMClusterChart() {
   const [data, setData] = useState(null);
   const [summary, setSummary] = useState([]);
+  const [rawClusters, setRawClusters] = useState([]);
+
+  // 1. Сначала получаем summary (ярлыки), потом сами кластеры
+  useEffect(() => {
+    fetchRFMSummary().then(res => setSummary(res));
+  }, []);
 
   useEffect(() => {
     fetchRFMClusters().then(res => {
       if (!res || !Array.isArray(res)) return;
+      setRawClusters(res); // сохраним для рекомендаций
 
+      // 2. Готовим группы для scatter-графика
       const grouped = {};
-
       res.forEach(c => {
         const cluster = c.cluster ?? 0;
         const x = c.recency ?? 0;
         const y = c.monetary ?? 0;
         const label = c.name || c.email;
+        // frequency для тултипа
+        const frequency = c.frequency ?? 0;
 
         if (!grouped[cluster]) grouped[cluster] = [];
-        grouped[cluster].push({ x, y, label });
+        grouped[cluster].push({ x, y, label, frequency, monetary: c.monetary, recency: c.recency });
       });
 
-      const datasets = Object.entries(grouped).map(([cluster, points], idx) => ({
-        label: `Кластер ${cluster}`,
-        data: points,
-        backgroundColor: clusterColors[idx % clusterColors.length],
-        pointRadius: 6,
-        pointHoverRadius: 8
-      }));
+      // 3. Собираем label для легенды из summary (например, "Кластер 0 — Ценный клиент")
+      const datasets = Object.entries(grouped).map(([cluster, points], idx) => {
+        const summaryObj = summary.find(s => String(s.cluster) === String(cluster));
+        const legendLabel = summaryObj ? `Кластер ${cluster} — ${summaryObj.label}` : `Кластер ${cluster}`;
+        return {
+          label: legendLabel,
+          data: points,
+          backgroundColor: clusterColors[idx % clusterColors.length],
+          pointRadius: 6,
+          pointHoverRadius: 8
+        };
+      });
 
       setData({ datasets });
     }).catch(console.error);
-
-    fetchRFMSummary()
-      .then(res => setSummary(res))
-      .catch(console.error);
-  }, []);
+  }, [summary]);
 
   if (!data) return <div>Загрузка...</div>;
 
+  // 1. Новый тултип (Recency, Frequency, Monetary, Кластер)
   const options = {
     responsive: true,
     plugins: {
@@ -90,8 +100,15 @@ export default function RFMClusterChart() {
       tooltip: {
         callbacks: {
           label: ctx => {
-            const { x, y, label } = ctx.raw;
-            return `${label}: Recency=${x}, Monetary=${y}`;
+            const { x, y, label, frequency } = ctx.raw;
+            // найдём label кластера из summary
+            const clusterIdx = ctx.dataset.label.match(/^Кластер (\d+)/)?.[1] || "0";
+            const summaryObj = summary.find(s => String(s.cluster) === clusterIdx);
+            const labelStr = summaryObj ? summaryObj.label : "";
+            return `${label} | ${labelStr}
+Recency: ${x}
+Frequency: ${frequency}
+Monetary: ${y}`;
           }
         }
       },
@@ -109,6 +126,14 @@ export default function RFMClusterChart() {
       }
     }
   };
+
+  // 4. Секция "Рекомендации"
+  // Найдём всех “ценных клиентов” из кластеров
+  const vipClusterIdxs = summary
+    .filter(s => s.label === "Ценный клиент")
+    .map(s => s.cluster);
+
+  const vipClients = rawClusters.filter(c => vipClusterIdxs.includes(c.cluster));
 
   return (
     <div className="my-6">
@@ -140,6 +165,30 @@ export default function RFMClusterChart() {
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className="mt-8 p-4 bg-yellow-50 rounded-xl border border-yellow-200">
+        <h4 className="text-md font-bold mb-2 text-yellow-900">Рекомендации по работе с клиентами:</h4>
+        <ul className="list-disc ml-6 text-sm text-yellow-900">
+          <li>
+            <b>Ценным клиентам</b> стоит предложить персональные скидки или бонусы — они покупают чаще всего.
+          </li>
+          <li>
+            <b>Клиентам на грани ухода</b> можно отправить email с акцией или позвонить — их можно вернуть!
+          </li>
+        </ul>
+        {vipClients.length > 0 && (
+          <div className="mt-4">
+            <b>Текущие ценные клиенты:</b>
+            <ul className="ml-4 list-disc">
+              {vipClients.map(c =>
+                <li key={c.email}>
+                  {c.name || c.email} {c.phone && `(${c.phone})`} — Покупок: {c.frequency}, Сумма: {c.monetary}
+                </li>
+              )}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
