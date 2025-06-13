@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Admin({ products, onAddProduct, onDeleteProduct }) {
   const [form, setForm] = useState({
     name: "",
-    brand: "",           // <--- Новое поле!
+    brand: "",           
     price: "",
     image: "",
     description: "",
@@ -29,7 +29,7 @@ export default function Admin({ products, onAddProduct, onDeleteProduct }) {
     e.preventDefault();
     const newProduct = {
       name: form.name,
-      brand: form.brand,        // <--- Учти brand!
+      brand: form.brand,        
       price: parseInt(form.price, 10),
       image: form.image,
       description: form.description,

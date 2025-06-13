@@ -11,6 +11,7 @@ def product_helper(p) -> dict:
     return {
         "id": str(p["_id"]),
         "name": p["name"],
+        "brand": p.get("brand", ""),
         "price": p["price"],
         "image": p["image"],
         "description": p.get("description", ""),
