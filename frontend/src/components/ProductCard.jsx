@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+const fallbackImage = "img/no-photo.png";
+
 export default function ProductCard({ product, onAdd }) {
   return (
     <div

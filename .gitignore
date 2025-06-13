@@ -17,3 +17,5 @@ dist/
 .vscode/
 .idea/
 *.log
+/ProductImporter
+ProductImporter
