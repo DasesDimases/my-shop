@@ -12,13 +12,13 @@ export default function CategoriesAdmin() {
   }, [])
 
   const fetchData = () => {
-    axios.get('${import.meta.env.VITE_API_URL}/categories').then(res => setCategories(res.data))
-    axios.get('${import.meta.env.VITE_API_URL}/car-models').then(res => setModels(res.data))
+    axios.get(`${import.meta.env.VITE_API_URL}/categories`).then(res => setCategories(res.data))
+    axios.get(`${import.meta.env.VITE_API_URL}/car-models`).then(res => setModels(res.data))
   }
 
   const addCategory = () => {
     if (!newCategory.trim()) return
-    axios.post('${import.meta.env.VITE_API_URL}/categories', { name: newCategory })
+    axios.post(`${import.meta.env.VITE_API_URL}/categories`, { name: newCategory })
       .then(() => {
         setNewCategory("")
         fetchData()
@@ -31,7 +31,7 @@ export default function CategoriesAdmin() {
 
   const addModel = () => {
     if (!newModel.trim()) return
-    axios.post('${import.meta.env.VITE_API_URL}/car-models', { name: newModel })
+    axios.post(`${import.meta.env.VITE_API_URL}/car-models`, { name: newModel })
       .then(() => {
         setNewModel("")
         fetchData()

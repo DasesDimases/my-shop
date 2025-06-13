@@ -2,12 +2,12 @@ import { useParams, Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
-export default function ProductPage({ onAdd }) {
+export default function ProductPage({ onAddToCart }) {
   const { id } = useParams()
   const [product, setProduct] = useState(null)
 
   useEffect(() => {
-    axios.get('${import.meta.env.VITE_API_URL}/products')
+    axios.get(`${import.meta.env.VITE_API_URL}/products`)
       .then(res => {
         const found = res.data.find(p => p.id === id)
         setProduct(found)
@@ -31,7 +31,7 @@ export default function ProductPage({ onAdd }) {
           <p className="text-sm text-gray-700 mb-6 whitespace-pre-line">{product.description || "Описание отсутствует"}</p>
           <p className="text-sm text-gray-500 mb-2">Код запчасти: {product.code || "не указан"}</p>
           <button
-            onClick={() => onAdd(product)}
+            onClick={() => onAddToCart(product)}
             className="bg-yellow-500 text-white px-6 py-2 rounded hover:bg-yellow-600"
           >
             В корзину

@@ -17,7 +17,7 @@ export default function Cart({ cart, onRemove, onClear, onIncrease, onDecrease }
       createdAt: new Date().toISOString()
     }
 
-    axios.post('${import.meta.env.VITE_API_URL}/orders', order)
+    axios.post(`${import.meta.env.VITE_API_URL}/orders`, order)
       .then(() => {
         setSubmitted(true)
         onClear()

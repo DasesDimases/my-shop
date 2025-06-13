@@ -46,11 +46,11 @@ function AppContent({
         <Route path="/" element={<Home />} />
         <Route
           path="/catalog"
-          element={<Catalog products={productList} onAdd={handleAddToCart} />}
+          element={<Catalog products={productList} onAddToCart={handleAddToCart} />}
         />
         <Route
           path="/product/:id"
-          element={<ProductPage onAdd={handleAddToCart} />}
+          element={<ProductPage onAddToCart={handleAddToCart} />}
         />
         <Route
           path="/cart"
@@ -183,7 +183,7 @@ export default function App() {
       setProductList(input);
     } else {
       axios
-        .post('${import.meta.env.VITE_API_URL}/products', input)
+        .post(`${import.meta.env.VITE_API_URL}/products`, input)
         .then((res) => setProductList((prev) => [...prev, res.data]))
         .catch((err) => console.error("Ошибка добавления товара:", err));
     }
