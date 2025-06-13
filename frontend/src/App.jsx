@@ -159,10 +159,24 @@ export default function App() {
 
   useEffect(() => {
     axios
-      .get('${import.meta.env.VITE_API_URL}/products')
-      .then((res) => setProductList(res.data))
-      .catch((err) => console.error("Ошибка загрузки товаров:", err));
+      .get(`${import.meta.env.VITE_API_URL}/products`)
+      .then((res) => {
+        console.log("Ответ от API:", res.data);
+        // Если это объект с products:
+        if (Array.isArray(res.data)) {
+          setProductList(res.data);
+        } else if (res.data.products && Array.isArray(res.data.products)) {
+          setProductList(res.data.products);
+        } else {
+          setProductList([]);
+        }
+      })
+      .catch((err) => {
+        console.error("Ошибка загрузки товаров:", err);
+        setProductList([]);
+      });
   }, []);
+
 
   const handleAddProduct = (input) => {
     if (typeof input === "function") {
