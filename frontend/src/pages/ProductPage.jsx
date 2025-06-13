@@ -5,7 +5,7 @@ import axios from "axios";
 export default function ProductPage({ onAddToCart }) {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const fallbackImage = "img/no_photo.png";
+  const fallbackImage = "frontend/img/no_photo.png";
 
   useEffect(() => {
     axios
