@@ -26,7 +26,7 @@ export default function Login() {
           type="email"
           placeholder="Email"
           required
-          className="text-black"
+          className="w-full p-2 mb-3 border rounded"
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
@@ -34,11 +34,13 @@ export default function Login() {
           type="password"
           placeholder="Пароль"
           required
-          className="text-black"
+          className="w-full p-2 mb-4 border rounded"
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-      <button type="submit">Войти</button>
+      <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
+        Войти
+      </button>
     </form>
   );
 }
