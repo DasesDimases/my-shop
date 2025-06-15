@@ -85,7 +85,7 @@ export default function Admin({ products, onAddProduct, onDeleteProduct }) {
         </div>
       </div>
 
-      {/* Форма добавления */}
+     
       {!editing && (
         <form onSubmit={handleSubmit} className="mb-8 bg-gray-50 p-6 rounded shadow">
           <h2 className="text-xl font-semibold mb-4">Добавить товар</h2>
@@ -144,7 +144,7 @@ export default function Admin({ products, onAddProduct, onDeleteProduct }) {
         </form>
       )}
 
-      {/* Форма редактирования */}
+      
       {editing && (
         <form onSubmit={handleEditSubmit} className="mb-8 bg-yellow-50 p-6 rounded shadow">
           <h2 className="text-xl font-semibold mb-4">Редактировать товар</h2>
@@ -152,7 +152,6 @@ export default function Admin({ products, onAddProduct, onDeleteProduct }) {
           <input type="text" className="w-full p-2 mb-3 border rounded"
             value={editing.name} onChange={e => setEditing({ ...editing, name: e.target.value })} />
 
-          {/* Поле бренд */}
           <input type="text" className="w-full p-2 mb-3 border rounded"
             value={editing.brand} onChange={e => setEditing({ ...editing, brand: e.target.value })} />
 
@@ -235,7 +234,6 @@ export default function Admin({ products, onAddProduct, onDeleteProduct }) {
         filteredProducts.map(p => (
           <div key={p.id} className="flex justify-between items-center border-b py-3">
             <div>
-              {/* Вывод бренда перед названием */}
               <p className="font-medium">
                 {p.brand && <span className="font-bold text-yellow-700">{p.brand} </span>}
                 {p.name}
