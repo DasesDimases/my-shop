@@ -14,14 +14,12 @@ import Nav from "./components/Nav";
 import Catalog from "./components/Catalog";
 import Home from "./pages/Home";
 
-// Вся логика вынесена в AppContent (внутри Router)
 function AppContent({
   cart, setCart, handleAddToCart, handleRemoveFromCart, handleClearCart,
   handleIncreaseQty, handleDecreaseQty, totalCount, productList,
   handleAddProduct, handleDeleteProduct
 }) {
   const location = useLocation();
-  // Проверка маршрута для скрытия фона
   const hideBg = [
     "/admin",
     "/admin/customers",
