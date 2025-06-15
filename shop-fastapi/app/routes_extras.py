@@ -6,9 +6,6 @@ from app.auth import hash_password, verify_password, create_access_token
 
 router = APIRouter()
 
-# ------------------------
-# Категории товаров
-# ------------------------
 
 @router.get("/categories")
 async def get_categories():
@@ -32,10 +29,6 @@ async def delete_category(cat_id: str):
     return {"success": True}
 
 
-# ------------------------
-# Модели автомобилей
-# ------------------------
-
 @router.get("/car-models")
 async def get_car_models():
     items = []
@@ -57,10 +50,6 @@ async def delete_car_model(model_id: str):
         raise HTTPException(status_code=404, detail="Модель не найдена")
     return {"success": True}
 
-
-# ------------------------
-# Для подключения к товарам
-# ------------------------
 
 @router.get("/meta")
 async def get_meta():
