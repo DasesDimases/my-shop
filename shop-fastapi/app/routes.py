@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, Body, Depends
 from app.models import Product
 from app.db import product_collection, db
 from bson import ObjectId
-from app.auth import get_superuser  # зависимость для прав суперпользователя
+from app.auth import get_superuser 
 from app.auth import get_current_user
 
 router = APIRouter()
@@ -20,7 +20,6 @@ def product_helper(p) -> dict:
         "models": p.get("models", [])
     }
 
-# ——— Public Endpoints ———
 
 @router.get("/products")
 async def get_products():
@@ -37,7 +36,6 @@ async def get_orders():
         orders.append(order)
     return orders
 
-# ——— Admin (protected) Endpoints ———
 
 @router.post(
     "/products",
