@@ -61,7 +61,7 @@ export default function RFM3DChart() {
 
       console.log("RFM raw data:", data)
 
-      const scale = 0.1 // чтобы уменьшить monetary до видимого масштаба
+      const scale = 0.1
       const pts = data.map(c => ({
         x: c.recency ?? 0,
         y: c.frequency ?? 0,
