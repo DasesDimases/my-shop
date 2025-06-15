@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import { useState } from "react";
 import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +12,7 @@ export default function Login() {
     e.preventDefault();
     try {
       await login(email, password);
-      navigate("/catalog"); // после успешной авторизации
+      navigate("/catalog"); 
     } catch {
       alert("Неверные учётные данные");
     }
