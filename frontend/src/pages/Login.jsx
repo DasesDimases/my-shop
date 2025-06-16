@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import { useState } from "react";
 import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +12,11 @@ export default function Login() {
     e.preventDefault();
     try {
       await login(email, password);
+<<<<<<< HEAD
       navigate("/catalog");
+=======
+      navigate("/catalog"); 
+>>>>>>> 114234a7
     } catch {
       alert("Неверные учётные данные");
     }
@@ -26,7 +29,7 @@ export default function Login() {
           type="email"
           placeholder="Email"
           required
-          className="w-full p-2 mb-3 border rounded"
+          className="w-full p-2 mb-3 border rounded text-black"
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
@@ -34,7 +37,7 @@ export default function Login() {
           type="password"
           placeholder="Пароль"
           required
-          className="w-full p-2 mb-4 border rounded"
+          className="w-full p-2 mb-4 border rounded text-black"
           value={password}
           onChange={e => setPassword(e.target.value)}
         />

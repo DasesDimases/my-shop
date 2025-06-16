@@ -163,7 +163,6 @@ async def cluster_customers_models():
                 if idx is not None:
                     customer_vectors[email]["vector"][idx] += item.get("qty", 1)
 
-    # Добавляем топ-3 моделей
     for customer in customer_vectors.values():
         vector = customer["vector"]
         top_models = sorted(
@@ -246,7 +245,11 @@ async def cluster_customers_rfm():
                 continue
 
         if date.tzinfo is not None:
+<<<<<<< HEAD
             date = date.astimezone(timezone.utc).replace(tzinfo=None)
+=======
+            date = date.astimezone(timezone.utc).replace(tzinfo=None) 
+>>>>>>> 114234a7
 
         if not date:
             continue

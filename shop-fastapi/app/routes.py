@@ -36,6 +36,13 @@ async def get_orders():
         orders.append(order)
     return orders
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 4eaa1782 (Auto update)
+>>>>>>> 114234a7
 @router.post(
     "/products",
     dependencies=[Depends(get_superuser)]

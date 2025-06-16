@@ -7,7 +7,10 @@ body {
   color: #eee;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 114234a7
 body.site-bg {
   background: url('/img/fon.jpg') no-repeat center center fixed;
   background-size: cover;
@@ -15,9 +18,14 @@ body.site-bg {
   background-blend-mode: darken;
 }
 
+<<<<<<< HEAD
 
 body.admin-bg {
   background: #f3f4f6 !important; 
+=======
+body.admin-bg {
+  background: #f3f4f6 !important;   
+>>>>>>> 114234a7
   background-image: none !important;
   color: #222;
 }

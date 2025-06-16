@@ -49,7 +49,6 @@ export function AuthProvider({ children }) {
         email,
         password
       })
-      // успешная регистрация → логиним
       return await login(email, password)
     } catch (err) {
       console.error("Ошибка регистрации:", err.response?.data || err.message)
