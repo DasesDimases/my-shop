@@ -245,11 +245,7 @@ async def cluster_customers_rfm():
                 continue
 
         if date.tzinfo is not None:
-<<<<<<< HEAD
             date = date.astimezone(timezone.utc).replace(tzinfo=None) 
-=======
-            date = date.astimezone(timezone.utc).replace(tzinfo=None)
->>>>>>> 4eaa1782 (Auto update)
 
         if not date:
             continue
