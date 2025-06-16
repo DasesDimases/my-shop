@@ -12,11 +12,7 @@ export default function Login() {
     e.preventDefault();
     try {
       await login(email, password);
-<<<<<<< HEAD
       navigate("/catalog");
-=======
-      navigate("/catalog"); 
->>>>>>> 114234a7
     } catch {
       alert("Неверные учётные данные");
     }

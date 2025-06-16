@@ -85,13 +85,6 @@ export default function Admin({ products, onAddProduct, onDeleteProduct }) {
         </div>
       </div>
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-     
-=======
->>>>>>> 4eaa1782 (Auto update)
->>>>>>> 114234a7
       {!editing && (
         <form onSubmit={handleSubmit} className="mb-8 bg-gray-50 p-6 rounded shadow">
           <h2 className="text-xl font-semibold mb-4">Добавить товар</h2>
@@ -149,13 +142,6 @@ export default function Admin({ products, onAddProduct, onDeleteProduct }) {
         </form>
       )}
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-      
-=======
->>>>>>> 4eaa1782 (Auto update)
->>>>>>> 114234a7
       {editing && (
         <form onSubmit={handleEditSubmit} className="mb-8 bg-yellow-50 p-6 rounded shadow">
           <h2 className="text-xl font-semibold mb-4">Редактировать товар</h2>
