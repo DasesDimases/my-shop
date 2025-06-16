@@ -61,11 +61,7 @@ export default function RFM3DChart() {
 
       console.log("RFM raw data:", data)
 
-<<<<<<< HEAD
       const scale = 0.1
-=======
-      const scale = 0.1 
->>>>>>> 4eaa1782 (Auto update)
       const pts = data.map(c => ({
         x: c.recency ?? 0,
         y: c.frequency ?? 0,

@@ -27,7 +27,7 @@ export default function Register() {
         type="email"
         placeholder="Email"
         required
-        className="w-full p-2 mb-3 border rounded"
+        className="w-full p-2 mb-3 border rounded text-black"
         value={email}
         onChange={e => setEmail(e.target.value)}
       />
@@ -35,7 +35,7 @@ export default function Register() {
         type="password"
         placeholder="Пароль"
         required
-        className="w-full p-2 mb-4 border rounded"
+        className="w-full p-2 mb-4 border rounded text-black"
         value={password}
         onChange={e => setPassword(e.target.value)}
       />

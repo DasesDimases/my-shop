@@ -55,11 +55,7 @@ export default function RFMClusterChart() {
   useEffect(() => {
     fetchRFMClusters().then(res => {
       if (!res || !Array.isArray(res)) return;
-<<<<<<< HEAD
       setRawClusters(res);
-=======
-      setRawClusters(res); 
->>>>>>> 4eaa1782 (Auto update)
 
       const grouped = {};
       res.forEach(c => {
@@ -91,10 +87,6 @@ export default function RFMClusterChart() {
 
   if (!data) return <div>Загрузка...</div>;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 4eaa1782 (Auto update)
   const options = {
     responsive: true,
     plugins: {

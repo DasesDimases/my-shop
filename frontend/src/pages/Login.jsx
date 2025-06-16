@@ -12,11 +12,7 @@ export default function Login() {
     e.preventDefault();
     try {
       await login(email, password);
-<<<<<<< HEAD
       navigate("/catalog"); 
-=======
-      navigate("/catalog");
->>>>>>> 4eaa1782 (Auto update)
     } catch {
       alert("Неверные учётные данные");
     }
@@ -29,7 +25,7 @@ export default function Login() {
           type="email"
           placeholder="Email"
           required
-          className="w-full p-2 mb-3 border rounded"
+          className="w-full p-2 mb-3 border rounded text-black"
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
@@ -37,7 +33,7 @@ export default function Login() {
           type="password"
           placeholder="Пароль"
           required
-          className="w-full p-2 mb-4 border rounded"
+          className="w-full p-2 mb-4 border rounded text-black"
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
