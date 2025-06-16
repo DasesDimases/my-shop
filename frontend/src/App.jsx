@@ -14,14 +14,12 @@ import Nav from "./components/Nav";
 import Catalog from "./components/Catalog";
 import Home from "./pages/Home";
 
-// Вся логика вынесена в AppContent (внутри Router)
 function AppContent({
   cart, setCart, handleAddToCart, handleRemoveFromCart, handleClearCart,
   handleIncreaseQty, handleDecreaseQty, totalCount, productList,
   handleAddProduct, handleDeleteProduct
 }) {
   const location = useLocation();
-  // Проверка маршрута для скрытия фона
   const hideBg = [
     "/admin",
     "/admin/customers",
@@ -162,7 +160,6 @@ export default function App() {
       .get(`${import.meta.env.VITE_API_URL}/products`)
       .then((res) => {
         console.log("Ответ от API:", res.data);
-        // Если это объект с products:
         if (Array.isArray(res.data)) {
           setProductList(res.data);
         } else if (res.data.products && Array.isArray(res.data.products)) {

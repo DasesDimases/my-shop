@@ -13,7 +13,7 @@ export default function Login() {
     e.preventDefault();
     try {
       await login(email, password);
-      navigate("/catalog"); // после успешной авторизации
+      navigate("/catalog");
     } catch {
       alert("Неверные учётные данные");
     }

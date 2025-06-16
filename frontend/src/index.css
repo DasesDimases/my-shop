@@ -7,7 +7,7 @@ body {
   color: #eee;
 }
 
-/* Фон для клиентской части */
+
 body.site-bg {
   background: url('/img/fon.jpg') no-repeat center center fixed;
   background-size: cover;
@@ -15,9 +15,9 @@ body.site-bg {
   background-blend-mode: darken;
 }
 
-/* Фон для админки */
+
 body.admin-bg {
-  background: #f3f4f6 !important;    /* Светло-серый Tailwind */
+  background: #f3f4f6 !important; 
   background-image: none !important;
   color: #222;
 }

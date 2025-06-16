@@ -93,7 +93,6 @@ async def cluster_customers_categories():
                 idx = category_indices[cat]
                 customer_vectors[email]["vector"][idx] += item.get("qty", 1)
 
-    # Добавляем топ-3 категории
     for customer in customer_vectors.values():
         vector = customer["vector"]
         top_categories = sorted(
@@ -232,7 +231,7 @@ async def get_model_popularity():
 async def cluster_customers_rfm():
     orders = db["orders"]
     customer_data = {}
-    now = datetime.utcnow().replace(tzinfo=None)  # гарантированно naive
+    now = datetime.utcnow().replace(tzinfo=None)
 
     async for order in orders.find():
         email = order["customer"]["email"]
@@ -247,7 +246,7 @@ async def cluster_customers_rfm():
                 continue
 
         if date.tzinfo is not None:
-            date = date.astimezone(timezone.utc).replace(tzinfo=None)  # преобразуем и убираем зону
+            date = date.astimezone(timezone.utc).replace(tzinfo=None)
 
         if not date:
             continue
@@ -292,7 +291,6 @@ async def cluster_customers_rfm():
     for i, label in enumerate(labels):
         customers[i]["cluster"] = int(label)
 
-    # Вычисляем средние значения для каждого кластера
     cluster_stats = defaultdict(lambda: {"count": 0, "recency": 0, "frequency": 0, "monetary": 0})
     for c in customers:
         cl = c["cluster"]
@@ -366,7 +364,6 @@ async def summarize_rfm_clusters():
             "count": data["count"]
         })
 
-    # --- Вот здесь определяем ярлыки на основании Monetary ---
     monetaries = [r["avg_monetary"] for r in result]
     max_monetary = max(monetaries)
     min_monetary = min(monetaries)

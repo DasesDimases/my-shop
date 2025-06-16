@@ -1,4 +1,3 @@
-// src/components/RFMClusterChart.jsx
 import { useEffect, useState } from "react";
 import { Scatter } from "react-chartjs-2";
 import {
@@ -49,7 +48,6 @@ export default function RFMClusterChart() {
   const [summary, setSummary] = useState([]);
   const [rawClusters, setRawClusters] = useState([]);
 
-  // 1. Сначала получаем summary (ярлыки), потом сами кластеры
   useEffect(() => {
     fetchRFMSummary().then(res => setSummary(res));
   }, []);
@@ -57,23 +55,20 @@ export default function RFMClusterChart() {
   useEffect(() => {
     fetchRFMClusters().then(res => {
       if (!res || !Array.isArray(res)) return;
-      setRawClusters(res); // сохраним для рекомендаций
+      setRawClusters(res); 
 
-      // 2. Готовим группы для scatter-графика
       const grouped = {};
       res.forEach(c => {
         const cluster = c.cluster ?? 0;
         const x = c.recency ?? 0;
         const y = c.monetary ?? 0;
         const label = c.name || c.email;
-        // frequency для тултипа
         const frequency = c.frequency ?? 0;
 
         if (!grouped[cluster]) grouped[cluster] = [];
         grouped[cluster].push({ x, y, label, frequency, monetary: c.monetary, recency: c.recency });
       });
 
-      // 3. Собираем label для легенды из summary (например, "Кластер 0 — Ценный клиент")
       const datasets = Object.entries(grouped).map(([cluster, points], idx) => {
         const summaryObj = summary.find(s => String(s.cluster) === String(cluster));
         const legendLabel = summaryObj ? `Кластер ${cluster} — ${summaryObj.label}` : `Кластер ${cluster}`;
@@ -92,7 +87,7 @@ export default function RFMClusterChart() {
 
   if (!data) return <div>Загрузка...</div>;
 
-  // 1. Новый тултип (Recency, Frequency, Monetary, Кластер)
+
   const options = {
     responsive: true,
     plugins: {
@@ -101,7 +96,6 @@ export default function RFMClusterChart() {
         callbacks: {
           label: ctx => {
             const { x, y, label, frequency } = ctx.raw;
-            // найдём label кластера из summary
             const clusterIdx = ctx.dataset.label.match(/^Кластер (\d+)/)?.[1] || "0";
             const summaryObj = summary.find(s => String(s.cluster) === clusterIdx);
             const labelStr = summaryObj ? summaryObj.label : "";
@@ -127,8 +121,6 @@ Monetary: ${y}`;
     }
   };
 
-  // 4. Секция "Рекомендации"
-  // Найдём всех “ценных клиентов” из кластеров
   const vipClusterIdxs = summary
     .filter(s => s.label === "Ценный клиент")
     .map(s => s.cluster);
