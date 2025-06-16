@@ -4,10 +4,17 @@ export default function Home() {
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-transparent">
       <h1 className="text-4xl font-extrabold text-yellow-400 mb-4 drop-shadow">
+<<<<<<< HEAD
         Магазин автозапчастей RenaultParts
       </h1>
       <p className="text-xl text-gray-200 mb-8 text-center max-w-xl">
         Интернет-магазин оригинальных и аналоговых запчастей для Renault. 
+=======
+        Магазин автозапчастей Renault&Lada36
+      </h1>
+      <p className="text-xl text-gray-200 mb-8 text-center max-w-xl">
+        Интернет-магазин оригинальных и аналоговых запчастей для Renault и Lada. 
+>>>>>>> 4eaa1782 (Auto update)
         Только проверенные поставщики и оптовые цены!
       </p>
       <div className="flex flex-col gap-4 items-center">

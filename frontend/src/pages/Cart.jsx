@@ -93,9 +93,6 @@ export default function Cart({ cart, onRemove, onClear, onIncrease, onDecrease }
     )
   }
 
-
-
-
       <p className="text-right font-semibold mb-6">Итого: {totalPrice} ₽</p>
 
       <form onSubmit={handleSubmit} className="bg-gray-50 p-6 rounded shadow">

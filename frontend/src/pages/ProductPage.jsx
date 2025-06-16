@@ -31,7 +31,6 @@ export default function ProductPage({ onAddToCart }) {
         <img src={product.image || fallbackImage} alt={product.name} className="w-full rounded shadow" />
         <div>
           <h1 className="text-3xl font-bold mb-4">
-            {/* Новый вывод: бренд + название */}
             {product.brand && (
               <span className="font-bold text-yellow-400">{product.brand} </span>
             )}

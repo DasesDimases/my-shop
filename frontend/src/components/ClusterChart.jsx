@@ -47,7 +47,7 @@ export default function ClusterChart({ type = "customers" }) {
           x = c.total ?? 0
           y = c.ordersCount ?? 0
         } else {
-          x = 1 // абстрактная ось
+          x = 1 
           y = 1
         }
 

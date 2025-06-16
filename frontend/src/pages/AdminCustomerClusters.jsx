@@ -40,7 +40,6 @@ export default function AdminCustomerClusters() {
         >
           Обновить кластеры
         </button>
-
         <ClusterChart type="customers" />
         <ClusterChart type="categories" />
         <ClusterChart type="models" />
@@ -48,7 +47,6 @@ export default function AdminCustomerClusters() {
         <PopularityChart type="models" />
         <RFMClusterChart />
         <RFM3DChart />
-    
     </div>
   );
 }

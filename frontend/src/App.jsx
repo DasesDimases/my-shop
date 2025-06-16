@@ -160,7 +160,6 @@ export default function App() {
       .get(`${import.meta.env.VITE_API_URL}/products`)
       .then((res) => {
         console.log("Ответ от API:", res.data);
-        // Если это объект с products:
         if (Array.isArray(res.data)) {
           setProductList(res.data);
         } else if (res.data.products && Array.isArray(res.data.products)) {

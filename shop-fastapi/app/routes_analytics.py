@@ -230,7 +230,7 @@ async def get_model_popularity():
 async def cluster_customers_rfm():
     orders = db["orders"]
     customer_data = {}
-    now = datetime.utcnow().replace(tzinfo=None)  # гарантированно naive
+    now = datetime.utcnow().replace(tzinfo=None)
 
     async for order in orders.find():
         email = order["customer"]["email"]
@@ -245,7 +245,11 @@ async def cluster_customers_rfm():
                 continue
 
         if date.tzinfo is not None:
+<<<<<<< HEAD
             date = date.astimezone(timezone.utc).replace(tzinfo=None) 
+=======
+            date = date.astimezone(timezone.utc).replace(tzinfo=None)
+>>>>>>> 4eaa1782 (Auto update)
 
         if not date:
             continue

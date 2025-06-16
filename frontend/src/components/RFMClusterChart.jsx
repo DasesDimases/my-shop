@@ -55,7 +55,11 @@ export default function RFMClusterChart() {
   useEffect(() => {
     fetchRFMClusters().then(res => {
       if (!res || !Array.isArray(res)) return;
+<<<<<<< HEAD
       setRawClusters(res);
+=======
+      setRawClusters(res); 
+>>>>>>> 4eaa1782 (Auto update)
 
       const grouped = {};
       res.forEach(c => {
@@ -87,6 +91,10 @@ export default function RFMClusterChart() {
 
   if (!data) return <div>Загрузка...</div>;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4eaa1782 (Auto update)
   const options = {
     responsive: true,
     plugins: {
@@ -95,7 +103,6 @@ export default function RFMClusterChart() {
         callbacks: {
           label: ctx => {
             const { x, y, label, frequency } = ctx.raw;
-            // найдём label кластера из summary
             const clusterIdx = ctx.dataset.label.match(/^Кластер (\d+)/)?.[1] || "0";
             const summaryObj = summary.find(s => String(s.cluster) === clusterIdx);
             const labelStr = summaryObj ? summaryObj.label : "";

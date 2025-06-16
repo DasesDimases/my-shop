@@ -20,7 +20,7 @@ export default function ProductCard({ product, onAdd }) {
           to={`/product/${product.id}`}
           className="hover:underline text-white-600"
         >
-          {/* Бренд + название */}
+        
           {product.brand && (
             <span className="font-bold text-yellow-400">{product.brand} </span>
           )}

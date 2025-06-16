@@ -9,11 +9,15 @@ from passlib.context import CryptContext
 
 from app.db import db
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4eaa1782 (Auto update)
 SECRET_KEY = os.getenv("SECRET_KEY", "change-this-secret-in-prod")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
+<<<<<<< HEAD
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -21,13 +25,22 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 
+=======
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
+
+>>>>>>> 4eaa1782 (Auto update)
 def hash_password(password: str) -> str:
     return pwd_context.hash(password)
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4eaa1782 (Auto update)
 def create_access_token(
     *,
     data: dict,
@@ -41,7 +54,10 @@ def create_access_token(
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4eaa1782 (Auto update)
 async def get_current_user(token: str = Depends(oauth2_scheme)):
     """
     Декодирует JWT из заголовка Authorization, возвращает запись пользователя из БД.
